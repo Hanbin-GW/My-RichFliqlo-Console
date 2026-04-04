@@ -1,0 +1,8 @@
+dist/
+build/
+dist/
+.venv/
+__pycache__/
+*.pyc
+*.spec
+build_command_note.txt
