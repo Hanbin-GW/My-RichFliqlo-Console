@@ -18,17 +18,27 @@ class ClockDisplay(Static):
 
       def __init__(self, *args, **kwargs) -> None:
             super().__init__(*args, **kwargs)
-            self.figlet = Figlet(font="big")
+            self.figlet_big = Figlet(font="big")
+            self.figlet_standard = Figlet(font="standard") 
 
       def on_mount(self) -> None:
             self.update_clock()
             self.set_interval(1, self.update_clock)
 
       def update_clock(self) -> None:
-            now = datetime.now().strftime("%H:%M:%S")
-            now = now.replace(":", " : ")
-            big_text = self.figlet.renderText(now)
-            self.time_text = f"[bold white]{big_text}[/bold white]"
+            now = datetime.now()
+
+            date_str = now.strftime("%Y-%m-%d")
+            time_str = now.strftime("%H:%M:%S").replace(":", " : ")
+
+            big_text = self.figlet_big.renderText(time_str)
+            standard_date = self.figlet_standard.renderText(date_str)
+
+            self.time_text = (
+                  f"[bold cyan]{standard_date}[/bold cyan]\n"
+                  f"[bold white]{big_text}[/bold white]"
+            )
+
 
       def watch_time_text(self, value: str) -> None:
             self.update(value)
