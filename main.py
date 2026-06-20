@@ -213,12 +213,11 @@ class MiniConsoleApp(App):
                         for line in out_text.splitlines():
                               log.write(line)
 
-                        if err_text:
-                              for line in err_text.splitlines():
-                                    log.write(f"[red]{line}[/red]")
-
-                        if not out_text and not err_text:
-                              log.write("[dim](no output)[/dim]")
+                  if err_text:                        # ← out_text와 같은 레벨
+                        for line in err_text.splitlines():
+                              log.write(f"[red]{line}[/red]")
+                  if not out_text and not err_text:
+                        log.write("[dim](no output)[/dim]")
 
             except Exception as e:
                   log.write(f"[red]Error:[/red] {e}")
